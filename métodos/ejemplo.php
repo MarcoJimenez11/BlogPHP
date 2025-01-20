@@ -1,0 +1,2 @@
+<?php
+//comentario de ejemplo
