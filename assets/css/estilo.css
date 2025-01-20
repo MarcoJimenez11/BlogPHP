@@ -113,3 +113,53 @@ aside button {
 aside button:hover {
     background-color: #005599;
 }
+
+/* Flex para listar las entradas */
+.contentEntrada {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.h1Entrada{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tablaEntrada {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #013e7a8f;
+}
+
+.tablaEntrada th, .tablaEntrada td {
+    padding: 10px; 
+    border: 2px solid #000000; 
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-container-acciones {
+    display: flex;
+    justify-content: space-around;
+}
+
+.botonEntrada {
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: #023973;
+    color: white;
+}
+
+.botonEntrada:hover {
+    background-color: #0056b3;
+}

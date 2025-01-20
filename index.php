@@ -14,7 +14,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog de Videojuegos</title>
-    <link rel="stylesheet" href="assets/css/estilo.css">
+    <link rel="stylesheet" href="./assets/css/estilo.css">
 </head>
 
 <body>
@@ -50,7 +50,9 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 <h3>Título de mi entrada</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
             </article>
-            <button>Ver todas las entradas</button>
+            <form action="./metodos/listarTodasEntradas.php" method="post">
+                <button>Ver todas las entradas</button>
+            </form>
         </section>
         <aside>
             <div class="search">
