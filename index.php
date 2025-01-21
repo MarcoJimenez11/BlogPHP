@@ -47,7 +47,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         <h3><?= htmlspecialchars($entradaIndividual["titulo"]) ?></h3>
                         <span class="categoria">Categoría: <?= htmlspecialchars($entradaIndividual["categoria"]) ?> | Fecha: <?= htmlspecialchars($entradaIndividual["fecha"]) ?></span>
                         <p>Descripcion: <?= htmlspecialchars($entradaIndividual["descripcion"]) ?></p>
-                        <a href="./metodos/verDetalleEntrada.php?id<?= $entradaIndividual["id_entrada"] ?>" class="botonLink">Leer más</a>
+                        <a href="./metodos/verDetalleEntrada.php?id=<?= $entradaIndividual["id_entrada"] ?>" class="botonLink">Leer más</a>
                     </article>
                 <?php endforeach; ?>
             <?php else: ?>
