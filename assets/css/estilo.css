@@ -207,7 +207,7 @@ article.ultimasEntradas .botonLink:hover {
     background-color: #005599;
 }
 
-/* Estilos para editar las entradas */
+/* Estilos para ver el detalle las entradas */
 .detalle {
     display: flex;
     justify-content: center;
@@ -261,4 +261,59 @@ article.ultimasEntradas .botonLink:hover {
 
 .boton-volver:hover {
     background-color: #005599;
+}
+
+/* Estilos para editar las entradas */
+.editar-entrada-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.editar-entrada-form {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.editar-entrada-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.editar-entrada-form input[type="text"],
+.editar-entrada-form textarea,
+.editar-entrada-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.editar-entrada-form button {
+    background-color: #003366;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.editar-entrada-form button:hover {
+    background-color: #005599;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
 }
