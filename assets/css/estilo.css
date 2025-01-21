@@ -94,7 +94,8 @@ aside h3 {
     margin-top: 0;
 }
 
-aside input, aside button {
+aside input,
+aside button {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -125,7 +126,7 @@ aside button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.h1Entrada{
+.h1Entrada {
     text-align: center;
     text-transform: uppercase;
 }
@@ -136,9 +137,10 @@ aside button:hover {
     background-color: #013e7a8f;
 }
 
-.tablaEntrada th, .tablaEntrada td {
-    padding: 10px; 
-    border: 2px solid #000000; 
+.tablaEntrada th,
+.tablaEntrada td {
+    padding: 10px;
+    border: 2px solid #000000;
 }
 
 .flex-container {
@@ -162,4 +164,100 @@ aside button:hover {
 
 .botonEntrada:hover {
     background-color: #0056b3;
+}
+
+
+/* Estilos para últimas entradas */
+article.ultimasEntradas {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+article.ultimasEntradas h3 {
+    margin-top: 0;
+    color: #003366;
+}
+
+article.ultimasEntradas .categoria {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+article.ultimasEntradas p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+article.ultimasEntradas .botonLink {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #003366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+article.ultimasEntradas .botonLink:hover {
+    background-color: #005599;
+}
+
+/* Estilos para editar las entradas */
+.editar-entrada-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.editar-entrada-form {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.editar-entrada-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.editar-entrada-form input[type="text"],
+.editar-entrada-form textarea,
+.editar-entrada-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.editar-entrada-form button {
+    background-color: #003366;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.editar-entrada-form button:hover {
+    background-color: #005599;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
 }
