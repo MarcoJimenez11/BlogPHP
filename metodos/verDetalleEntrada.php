@@ -5,7 +5,6 @@ session_start();
 
 // Requires
 require_once "../requires/conexion.php";
-require_once "./metodosExternos/obtenerEntradasPorCategoria.php";
 
 // Obtener el ID de la entrada desde la URL
 $entrada_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -45,16 +44,18 @@ try {
     <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
-
-    <main>
-        <article>
+    <?php require_once "../requires/header.php" ?>
+    <section class="detalle">
+        <article class="detalle-entrada">
+            <h2><?= htmlspecialchars($entrada['titulo']) ?></h2>
             <p><strong>Autor:</strong> <?= htmlspecialchars($entrada['autor']) ?></p>
             <p><strong>Categoría:</strong> <?= htmlspecialchars($entrada['categoria']) ?></p>
             <p><strong>Fecha:</strong> <?= htmlspecialchars($entrada['fecha']) ?></p>
             <div class="contenido">
                 <?= nl2br(htmlspecialchars($entrada['descripcion'])) ?>
             </div>
+            <a href="../index.php" class="boton-volver">Volver Atrás</a>
         </article>
-    </main>
+    </section>
 </body>
 </html>

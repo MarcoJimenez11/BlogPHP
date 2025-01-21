@@ -208,7 +208,7 @@ article.ultimasEntradas .botonLink:hover {
 }
 
 /* Estilos para editar las entradas */
-.editar-entrada-main {
+.detalle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,48 +216,49 @@ article.ultimasEntradas .botonLink:hover {
     background-color: #f8f8f8;
 }
 
-.editar-entrada-form {
+.detalle-entrada {
+    display: flex;
+    flex-direction: column;
     background: white;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
     width: 100%;
-    max-width: 600px;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
-.editar-entrada-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.detalle-entrada h2 {
+    margin-top: 0;
     color: #003366;
+    font-size: 2em;
 }
 
-.editar-entrada-form input[type="text"],
-.editar-entrada-form textarea,
-.editar-entrada-form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+.detalle-entrada p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 1.1em;
 }
 
-.editar-entrada-form button {
+.detalle-entrada .contenido {
+    margin-top: 20px;
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+.boton-volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
     background-color: #003366;
     color: white;
-    padding: 10px 15px;
-    border: none;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.editar-entrada-form button:hover {
+.boton-volver:hover {
     background-color: #005599;
-}
-
-.error-message {
-    color: red;
-    font-weight: bold;
 }
