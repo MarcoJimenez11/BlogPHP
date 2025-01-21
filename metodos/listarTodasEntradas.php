@@ -77,8 +77,8 @@ try {
                             <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['id'] == $entrada['usuario_id']): ?>
                                 <td>
                                     <div class="flex-container-acciones">
-                                        <a class="botonEntrada" href="./editarEntrada.php?id=<?= $entrada['id'] ?>">Editar</a>
-                                        <a class="botonEntrada" href="./borrarEntrada.php?id=<?= $entrada['id'] ?>" onclick="return confirm('¿Estás seguro de querer borrar esta entrada?')">Borrar</a>
+                                        <a class="botonEntrada" href="./editarEntradas.php?id=<?= $entrada['id'] ?>">Editar</a>
+                                        <a class="botonEntrada" href="./borrarEntradas.php?id=<?= $entrada['id'] ?>" onclick="return confirm('¿Estás seguro de querer borrar esta entrada?')">Borrar</a>
                                     </div>
                                 </td>
                             <?php endif; ?>
