@@ -2,7 +2,12 @@
 // 1. Iniciamos sesión
 session_start();
 
+// Requires
 require_once 'requires/conexion.php';
+require_once './metodos/metodosExternos/conseguirUltimasEntradas.php';
+
+// Llamamos a la funcion universal creada conseguirUltimasEntradas, para obtener las últimas entradas
+$ultimasEntradas = conseguirUltimasEntradas($db, 5);
 
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 ?>
@@ -34,22 +39,20 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
     <main>
         <section class="content">
             <h2>Últimas entradas</h2>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
+            <!-- Probando el array que me trae $ultimasEntradas -->
+            <!-- <?= var_dump($ultimasEntradas)?> -->
+            <?php if (!empty($ultimasEntradas)): ?>
+                <?php foreach ($ultimasEntradas as $entradaIndividual): ?>
+                    <article class ="ultimasEntradas">
+                        <h3><?= htmlspecialchars($entradaIndividual["titulo"]) ?></h3>
+                        <span class="categoria">Categoría: <?= htmlspecialchars($entradaIndividual["categoria"]) ?> | Fecha: <?= htmlspecialchars($entradaIndividual["fecha"]) ?></span>
+                        <p>Descripcion: <?= htmlspecialchars($entradaIndividual["descripcion"]) ?></p>
+                        <a href="./metodos/verDetalleEntrada.php?id<?= $entradaIndividual["id_entrada"] ?>" class="botonLink">Leer más</a>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No se han encontrado entradas</p>
+            <?php endif; ?>
             <form action="./metodos/listarTodasEntradas.php" method="post">
                 <button>Ver todas las entradas</button>
             </form>
