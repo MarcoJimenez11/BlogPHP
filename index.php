@@ -5,6 +5,7 @@ session_start();
 // Requires
 require_once 'requires/conexion.php';
 require_once './metodos/metodosExternos/conseguirUltimasEntradas.php';
+require_once './metodos/metodosExternos/conseguirCategorias.php';
 
 // Llamamos a la funcion universal creada conseguirUltimasEntradas, para obtener las últimas entradas
 $ultimasEntradas = conseguirUltimasEntradas($db, 5);
@@ -28,10 +29,14 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
         <nav>
             <ul>
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#">Acción</a></li>
-                <li><a href="#">Rol</a></li>
-                <li><a href="#">Deportes</a></li>
-                <li><a href="#">Responsabilidad</a></li>
+                <?php
+                $categorias = conseguirCategorias($db);
+                foreach ($categorias as $categoria):
+                ?>
+                    <li value="<?= $categoria['id'] ?>">
+                        <a href="#"><?= htmlspecialchars($categoria['nombre']) ?></a>
+                    </li>
+                <?php endforeach; ?>
                 <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
@@ -40,10 +45,10 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
         <section class="content">
             <h2>Últimas entradas</h2>
             <!-- Probando el array que me trae $ultimasEntradas -->
-            <!-- <?= var_dump($ultimasEntradas)?> -->
+            <!-- <?= var_dump($ultimasEntradas) ?> -->
             <?php if (!empty($ultimasEntradas)): ?>
                 <?php foreach ($ultimasEntradas as $entradaIndividual): ?>
-                    <article class ="ultimasEntradas">
+                    <article class="ultimasEntradas">
                         <h3><?= htmlspecialchars($entradaIndividual["titulo"]) ?></h3>
                         <span class="categoria">Categoría: <?= htmlspecialchars($entradaIndividual["categoria"]) ?> | Fecha: <?= htmlspecialchars($entradaIndividual["fecha"]) ?></span>
                         <p>Descripcion: <?= htmlspecialchars($entradaIndividual["descripcion"]) ?></p>
