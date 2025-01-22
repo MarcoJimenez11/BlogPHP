@@ -74,7 +74,13 @@ try {
                                     <?= htmlspecialchars($entrada['fecha']) ?>
                                 </div>
                             </td>
-                            <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['id'] == $entrada['usuario_id']): ?>
+                            <?php
+                            // var_dump($_SESSION["usuario"]) 
+                            ?>
+                            <?php
+                            //  var_dump($entrada['usuario_id']) 
+                            ?>
+                            <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']["id"] == $entrada['usuario_id']): ?>
                                 <td>
                                     <div class="flex-container-acciones">
                                         <a class="botonEntrada" href="./editarEntradas.php?id=<?= $entrada['id'] ?>">Editar</a>
