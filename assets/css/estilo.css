@@ -72,6 +72,15 @@ main {
     cursor: pointer;
 }
 
+button {
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .content button:hover {
     background-color: #005599;
 }

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
     $password = trim($_POST['passwordLogin']);
 
     if ($email && $password) {
-        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
+        $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonRegistro'])) {
 
     // Compruebo si el email y el password ya están en la tabla
     if ($email && $password) {
-        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email=:email");
+        $stmt = $db->prepare("SELECT id FROM usuarios WHERE email=:email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         var_dump($email);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonRegistro'])) {
             $apellidos = $_POST['apellidosRegistro'];
             $fecha = date("Y-m-d");
             var_dump($fecha);
-            $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, apellidos, email, password, fecha) 
+            $stmt = $db->prepare("INSERT INTO usuarios (nombre, apellidos, email, password, fecha) 
                                    VALUES (:nombre, :apellidos, :email, :password_hash, :fecha)");
             $stmt->bindParam(':nombre', $nombre);
             $stmt->bindParam(':apellidos', $apellidos);

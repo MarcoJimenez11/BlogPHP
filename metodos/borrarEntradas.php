@@ -39,5 +39,3 @@ if ($stmt->execute()) {
     die("Error al ejecutar la consulta: " . $errorInfo[2]);
 }
 ?>
-
-?>
