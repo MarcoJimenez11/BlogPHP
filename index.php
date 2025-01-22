@@ -68,7 +68,18 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 <input type="text" placeholder="Buscar...">
                 <button>Buscar</button>
             </div>
+            <!--Manejo de errores del formulario login-->
             <?php if (!$_SESSION['loginExito']) { ?>
+                <div class="login">
+                    <h3>Identificate</h3>
+                    <?php 
+                    if(isset($_SESSION['errorEmailLogin'])){
+                        echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
+                    }else{
+                    if (isset($_SESSION['errorPassLogin'])){
+                        echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
+                        }
+                    } ?>
                 <div class="login">
                     <h3>Identificate</h3>
                     <?php if (isset($_SESSION['errorPassLogin']))
@@ -91,7 +102,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         <button type="submit" name="botonRegistro">Registrar</button>
                     </form>
                 </div>
-            <?php } else { ?>
+            <?php } else { ?>  
                 <div>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>

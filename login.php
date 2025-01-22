@@ -21,18 +21,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-        if ($stmt->rowCount() == 1) {
+        if ($stmt->rowCount() == 1) { //si la contraseña es correcta
             $user = $stmt->fetch();
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['errorInicioSesion'] = 0;
-                $_SESSION['loginExito'] = true;
+            if ($user['email'] === $email) {
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['errorInicioSesion'] = 0;
+                    $_SESSION['loginExito'] = true;
+                } else {
+                    $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
+                    $_SESSION['errorInicioSesion']++;
+                    $_SESSION['ultimoIntento'] = time();
+                    $_SESSION['errorEmailLogin'] = null;
+                }
             } else {
-                $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
+                $_SESSION['errorEmailLogin'] = "El email no es correcto.";
                 $_SESSION['errorInicioSesion']++;
-                $_SESSION['ultimoIntento'] = time(); // Guardo la hora del ultimo intento fallido
+                $_SESSION['ultimoIntento'] = time();
             }
         } else {
-            echo "El email no existe en nuestra Base de Datos";
+            // Si no se encuentra el email en la base de datos
+            $_SESSION['errorEmailLogin'] = "El email no se encuentra registrado.";
+            $_SESSION['errorInicioSesion']++;
+            $_SESSION['ultimoIntento'] = time();
         }
     } else {
         echo "El email o contraseña errónea";
@@ -40,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
     header("Location: index.php");
     exit();
 }
+
 
 // 7. Controlamos los 3 intentos fallidos de inicio de sesión
 echo "Error inicio sesion" . var_dump($_SESSION['errorInicioSesion']);
