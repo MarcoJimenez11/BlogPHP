@@ -33,8 +33,8 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 $categorias = conseguirCategorias($db);
                 foreach ($categorias as $categoria):
                 ?>
-                    <li value="<?= $categoria['id'] ?>">
-                        <a href="#"><?= htmlspecialchars($categoria['nombre']) ?></a>
+                    <li>
+                        <a href="metodos/listarEntradasCategoria.php?id=<?= $categoria['id']?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
                     </li>
                 <?php endforeach; ?>
                 <li><a href="#">Contacto</a></li>
