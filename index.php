@@ -66,6 +66,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
+<<<<<<< HEAD
                     <?php if (isset($_SESSION['errorPassLogin']))
                         echo $_SESSION['errorPassLogin']; ?>
                     <form method="POST" action="login.php">
@@ -96,6 +97,92 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     </form>
                 </div>
             <?php } ?>
+||||||| 93cd55c
+                    <?php
+                    if (isset($_SESSION['errorEmailLogin'])) {
+                        echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
+                    } else {
+                        if (isset($_SESSION['errorPassLogin'])) {
+                            echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
+                        }
+                    } ?>
+                    <div class="login">
+                        <h3>Identificate</h3>
+                        <?php if (isset($_SESSION['errorPassLogin']))
+                            echo $_SESSION['errorPassLogin']; ?>
+                        <form method="POST" action="login.php">
+                            <input type="email" name="emailLogin" placeholder="Email">
+                            <input type="password" name="passwordLogin" placeholder="Contraseña">
+                            <button type="submit" name="botonLogin">Entrar</button>
+                        </form>
+                    </div>
+                    <div class="register">
+                        <h3>Registrate</h3>
+                        <?php if (isset($_SESSION['success_message']))
+                            echo $_SESSION['success_message']; ?>
+                        <form method="POST" action="registro.php">
+                            <input type="text" name="nombreRegistro" placeholder="Nombre">
+                            <input type="text" name="apellidosRegistro" placeholder="Apellidos">
+                            <input type="email" name="emailRegistro" placeholder="Email">
+                            <input type="password" name="passwordRegistro" placeholder="Contraseña">
+                            <button type="submit" name="botonRegistro">Registrar</button>
+                        </form>
+                    </div>
+                <?php } else { ?>
+                    <div>
+                        <form method="POST" action="logout.php">
+                            <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                        </form>
+                        <form method="POST" action="metodos/crearCategoria.php">
+                            <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
+                        </form>
+                    </div>
+                <?php } ?>
+=======
+                    <?php
+                    if (isset($_SESSION['errorEmailLogin'])) {
+                        echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
+                    } else {
+                        if (isset($_SESSION['errorPassLogin'])) {
+                            echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
+                        }
+                    } ?>
+                    <div class="login">
+                        <h3>Identificate</h3>
+                        <?php if (isset($_SESSION['errorPassLogin']))
+                            echo $_SESSION['errorPassLogin']; ?>
+                        <form method="POST" action="login.php">
+                            <input type="email" name="emailLogin" placeholder="Email">
+                            <input type="password" name="passwordLogin" placeholder="Contraseña">
+                            <button type="submit" name="botonLogin">Entrar</button>
+                        </form>
+                    </div>
+                    <div class="register">
+                        <h3>Registrate</h3>
+                        <?php if (isset($_SESSION['success_message']))
+                            echo $_SESSION['success_message']; ?>
+                        <form method="POST" action="registro.php">
+                            <input type="text" name="nombreRegistro" placeholder="Nombre">
+                            <input type="text" name="apellidosRegistro" placeholder="Apellidos">
+                            <input type="email" name="emailRegistro" placeholder="Email">
+                            <input type="password" name="passwordRegistro" placeholder="Contraseña">
+                            <button type="submit" name="botonRegistro">Registrar</button>
+                        </form>
+                    </div>
+                <?php } else { ?>
+                    <div>
+                        <form method="POST" action="metodos/actualizarDatosUsuario.php">
+                            <button type="submit" name="actualizarDatosUsuario.php">Editar datos de usuario</button>
+                        </form>
+                        <form method="POST" action="logout.php">
+                            <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                        </form>
+                        <form method="POST" action="metodos/crearCategoria.php">
+                            <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
+                        </form>
+                    </div>
+                <?php } ?>
+>>>>>>> Actualizar_Datos_Usuario_Pedro
 
         </aside>
     </main>
