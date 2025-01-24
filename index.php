@@ -107,6 +107,9 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     </div>
                 <?php } else { ?>
                     <div>
+                        <form method="POST" action="metodos/actualizarDatosUsuario.php">
+                            <button type="submit" name="actualizarDatosUsuario.php">Editar datos de usuario</button>
+                        </form>
                         <form method="POST" action="logout.php">
                             <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                         </form>
