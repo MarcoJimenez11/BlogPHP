@@ -2,19 +2,39 @@
 session_start();
 require_once '../requires/conexion.php';
 
-
-// Consultar todas las entradas
 try {
-    $categoria = $_GET["id"];
-    $sql = "SELECT e.id, e.titulo, e.descripcion, c.nombre AS categoria, 
+    if (isset($_GET["id"]) && $_GET["id"] != null) {
+        $categoria = $_GET["id"];
+        $sql = "SELECT e.id, e.titulo, e.descripcion, c.nombre AS categoria, 
+                u.nombre AS autor, u.id AS usuario_id, e.fecha 
+                FROM entradas e
+                INNER JOIN categorias c ON e.categoria_id = c.id
+                INNER JOIN usuarios u ON e.usuario_id = u.id
+                WHERE e.categoria_id = :categoria
+                ORDER BY e.fecha DESC";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
+    } else if (isset($_POST["buscarTitulo"]) && $_POST["buscarTitulo"] != null) {
+        $titulo = $_POST["buscarTitulo"];
+        $sql = "SELECT e.id, e.titulo, e.descripcion, c.nombre AS categoria, 
                    u.nombre AS autor, u.id AS usuario_id, e.fecha 
             FROM entradas e
             INNER JOIN categorias c ON e.categoria_id = c.id
             INNER JOIN usuarios u ON e.usuario_id = u.id
-            WHERE e.categoria_id = :categoria
+            WHERE e.titulo LIKE '%$titulo%'
             ORDER BY e.fecha DESC";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
+
+        $stmt = $db->prepare($sql);
+        // $stmt->bindParam(':titulo', $titulo, PDO::PARAM_INT);
+    } else {
+        $sql = "SELECT e.id, e.titulo, e.descripcion, c.nombre AS categoria, 
+                   u.nombre AS autor, u.id AS usuario_id, e.fecha 
+                FROM entradas e
+                INNER JOIN categorias c ON e.categoria_id = c.id
+                INNER JOIN usuarios u ON e.usuario_id = u.id
+                ORDER BY e.fecha DESC";
+        $stmt = $db->prepare($sql);
+    }
     $stmt->execute();
     $entradas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {

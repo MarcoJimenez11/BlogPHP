@@ -34,7 +34,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 foreach ($categorias as $categoria):
                 ?>
                     <li>
-                        <a href="metodos/listarEntradasCategoria.php?id=<?= $categoria['id']?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
+                        <a href="metodos/listarEntradas.php?id=<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
                     </li>
                 <?php endforeach; ?>
                 <li><a href="#">Contacto</a></li>
@@ -58,60 +58,63 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php else: ?>
                 <p>No se han encontrado entradas</p>
             <?php endif; ?>
-            <form action="./metodos/listarTodasEntradas.php" method="post">
+            <form action="./metodos/listarEntradas.php" method="post">
                 <button>Ver todas las entradas</button>
             </form>
         </section>
         <aside>
             <div class="search">
                 <h3>Buscar</h3>
-                <input type="text" placeholder="Buscar...">
+                <form action="./metodos/listarEntradas.php" method="post">
+                <input type="text" name="buscarTitulo" placeholder="Buscar...">
                 <button>Buscar</button>
+                </form>
+                
             </div>
             <!--Manejo de errores del formulario login-->
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
-                    <?php 
-                    if(isset($_SESSION['errorEmailLogin'])){
+                    <?php
+                    if (isset($_SESSION['errorEmailLogin'])) {
                         echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
-                    }else{
-                    if (isset($_SESSION['errorPassLogin'])){
-                        echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
+                    } else {
+                        if (isset($_SESSION['errorPassLogin'])) {
+                            echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
                         }
                     } ?>
-                <div class="login">
-                    <h3>Identificate</h3>
-                    <?php if (isset($_SESSION['errorPassLogin']))
-                        echo $_SESSION['errorPassLogin']; ?>
-                    <form method="POST" action="login.php">
-                        <input type="email" name="emailLogin" placeholder="Email">
-                        <input type="password" name="passwordLogin" placeholder="Contraseña">
-                        <button type="submit" name="botonLogin">Entrar</button>
-                    </form>
-                </div>
-                <div class="register">
-                    <h3>Registrate</h3>
-                    <?php if (isset($_SESSION['success_message']))
-                        echo $_SESSION['success_message']; ?>
-                    <form method="POST" action="registro.php">
-                        <input type="text" name="nombreRegistro" placeholder="Nombre">
-                        <input type="text" name="apellidosRegistro" placeholder="Apellidos">
-                        <input type="email" name="emailRegistro" placeholder="Email">
-                        <input type="password" name="passwordRegistro" placeholder="Contraseña">
-                        <button type="submit" name="botonRegistro">Registrar</button>
-                    </form>
-                </div>
-            <?php } else { ?>  
-                <div>
-                    <form method="POST" action="logout.php">
-                        <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
-                    </form>
-                    <form method="POST" action="metodos/crearCategoria.php">
-                        <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
-                    </form>
-                </div>
-            <?php } ?>
+                    <div class="login">
+                        <h3>Identificate</h3>
+                        <?php if (isset($_SESSION['errorPassLogin']))
+                            echo $_SESSION['errorPassLogin']; ?>
+                        <form method="POST" action="login.php">
+                            <input type="email" name="emailLogin" placeholder="Email">
+                            <input type="password" name="passwordLogin" placeholder="Contraseña">
+                            <button type="submit" name="botonLogin">Entrar</button>
+                        </form>
+                    </div>
+                    <div class="register">
+                        <h3>Registrate</h3>
+                        <?php if (isset($_SESSION['success_message']))
+                            echo $_SESSION['success_message']; ?>
+                        <form method="POST" action="registro.php">
+                            <input type="text" name="nombreRegistro" placeholder="Nombre">
+                            <input type="text" name="apellidosRegistro" placeholder="Apellidos">
+                            <input type="email" name="emailRegistro" placeholder="Email">
+                            <input type="password" name="passwordRegistro" placeholder="Contraseña">
+                            <button type="submit" name="botonRegistro">Registrar</button>
+                        </form>
+                    </div>
+                <?php } else { ?>
+                    <div>
+                        <form method="POST" action="logout.php">
+                            <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                        </form>
+                        <form method="POST" action="metodos/crearCategoria.php">
+                            <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
+                        </form>
+                    </div>
+                <?php } ?>
 
         </aside>
     </main>

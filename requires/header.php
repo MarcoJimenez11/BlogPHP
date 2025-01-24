@@ -14,7 +14,7 @@ require_once './metodosExternos/conseguirCategorias.php';
             foreach ($categorias as $categoria):
             ?>
                 <li>
-                    <a href="listarEntradasCategoria.php?id=<?= $categoria['id']?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
+                    <a href="listarEntradas.php?id=<?= $categoria['id']?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
                 </li>
             <?php endforeach; ?>
             <li><a href="#">Contacto</a></li>
