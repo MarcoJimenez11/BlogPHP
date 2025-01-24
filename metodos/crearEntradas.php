@@ -4,24 +4,23 @@ require_once '../requires/conexion.php';
 require_once './metodosExternos/conseguirCategorias.php';
 require_once "../requires/header.php";
 
-// Validar si el usuario está identificado
-if (!isset($_SESSION['loginExito']) || $_SESSION['loginExito'] === false) {
+//Validar que el usuario esta identificado
+if (!isset($_SESSION['loginExito']) || $_SESSION['loginExito'] === false || !isset($_SESSION['usuario']['id'])) {
     header("Location: index.php");
     exit;
 }
+//Obtener el id del usuario
+$usuario_id = $_SESSION['usuario']['id'];
 
-// Obtener el usuario_id de la sesión
-$usuario_id = $_SESSION['usuario_id'] ?? null;
-
-// Verificar si el usuario_id existe
-if (!$usuario_id) {
+// Verificar el usuario
+if (!$usuario_id || !is_numeric($usuario_id)) {
     header("Location: index.php");
     exit;
 }
 
 $categorias = conseguirCategorias($db);
 
-// Inicializar variables para evitar errores
+// Inicializar variables para evitar errores la primera vez que se entra
 $titulo = $_POST['titulo'] ?? '';
 $descripcion = $_POST['descripcion'] ?? '';
 $categoria_id = $_POST['categoria'] ?? '';
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "Selecciona una categoría válida.";
     }
 
-    // Si no hay errores, insertar la entrada en la base de datos
+    // Si no hay errore insertar la entrada en la base de datos
     if (empty($errores)) {
         try {
             $query = $db->prepare(

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once 'requires/conexion.php';
@@ -12,53 +13,69 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SESSION['errorInicioSesion'] < 3) {
     // Comprobamos que el email es válido
     $email = filter_var(trim($_POST['emailLogin']), FILTER_VALIDATE_EMAIL);
-    // Comprobamos que la contraseña es válida
+    // Comprobamos que la contraeña es válida
     $password = trim($_POST['passwordLogin']);
 
     if ($email && $password) {
         $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = :email");
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);//Se utiliza por seguridad
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-        if ($stmt->rowCount() == 1) {//si la contraseña es correct
-            $user = $stmt->fetch(); 
-            // die(var_dump($usuario));
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['errorInicioSesion'] = 0; 
-                $_SESSION['loginExito'] = true; 
-                $_SESSION['usuario_id'] = $user['id']; // Guardar el id del usuario para poder manejarlo
 
-                header("Location: index.php");
-                exit();
+        if ($stmt->rowCount() == 1) { //si la contraseña es correcta
+            $usuario = $stmt->fetch();
+            // die(var_dump($usuario));
+            if ($usuario['email'] === $email) {
+                if (password_verify($password, $usuario['password'])) {
+                    // die(var_dump($usuario["nombre"]));
+                    $_SESSION['usuario'] = [
+                        'id' => $usuario['id'],
+                        'nombre' => $usuario['nombre'],
+                        'apellidos' => $usuario['apellidos'],
+                        'email' => $usuario['email']
+                    ];
+
+                    $_SESSION['errorInicioSesion'] = 0;
+                    $_SESSION['loginExito'] = true;
+                } else {
+                    $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
+                    $_SESSION['errorInicioSesion']++;
+                    $_SESSION['ultimoIntento'] = time();
+                    $_SESSION['errorEmailLogin'] = null;
+                }
             } else {
-                $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
+                $_SESSION['errorEmailLogin'] = "El email no es correcto.";
                 $_SESSION['errorInicioSesion']++;
-                $_SESSION['ultimoIntento'] = time(); 
+                $_SESSION['ultimoIntento'] = time();
             }
         } else {
-            $_SESSION['errorPassLogin'] = "El email no existe en nuestra Base de Datos.";
+            // Si no se encuentra el email en la base de datos
+            $_SESSION['errorEmailLogin'] = "El email no se encuentra registrado.";
+            $_SESSION['errorInicioSesion']++;
+            $_SESSION['ultimoIntento'] = time();
         }
     } else {
-        $_SESSION['errorPassLogin'] = "Por favor, introduce un email y contraseña válidos.";
+        echo "El email o contraseña errónea";
     }
-
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
+
 // 7. Controlamos los 3 intentos fallidos de inicio de sesión
+echo "Error inicio sesion" . var_dump($_SESSION['errorInicioSesion']);
+echo "ultimo intento: " . var_dump($_SESSION['ultimoIntento']);
 if ($_SESSION['errorInicioSesion'] >= 3) {
     $tiempoRestante = time() - $_SESSION['ultimoIntento'];
     if ($tiempoRestante < 5) {
         // Bloqueo al usuario durante 5 segundos
         echo "<script> 
-            setTimeout(function() {
-                window.location.reload();
-            }, 5000);
+        setTimeout(function() {
+            window.location.reload();
+        }, 5000);
         </script>";
     } else {
         // Hacemos un reset de los errores si han pasado más de 5 segundos
         $_SESSION['errorInicioSesion'] = 0;
     }
 }
-?>
