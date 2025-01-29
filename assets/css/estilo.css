@@ -326,3 +326,32 @@ article.ultimasEntradas .botonLink:hover {
     color: red;
     font-weight: bold;
 }
+
+/*Estilos del checkbox recuérdame*/
+.login form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.login .checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 8px;
+}
+
+.login label {
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.login input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+

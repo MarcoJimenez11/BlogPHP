@@ -74,7 +74,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <!--Manejo de errores del formulario login-->
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
-                    <h3>Identificate</h3>
+                    <h3>Identifícate</h3>
                     <?php
                     if (isset($_SESSION['errorEmailLogin'])) {
                         echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
@@ -84,17 +84,22 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         }
                     } ?>
                     <div class="login">
-                        <h3>Identificate</h3>
+                        <h3>Identifícate</h3>
                         <?php if (isset($_SESSION['errorPassLogin']))
                             echo $_SESSION['errorPassLogin']; ?>
                         <form method="POST" action="login.php">
-                            <input type="email" name="emailLogin" placeholder="Email">
-                            <input type="password" name="passwordLogin" placeholder="Contraseña">
+                            <input type="email" name="emailLogin" placeholder="Email"
+                                value="<?= isset($_COOKIE['emailLogin']) ? htmlspecialchars($_COOKIE['emailLogin']) : '' ?>" required>
+                            <input type="password" name="passwordLogin" placeholder="Contraseña" required>
+                            <!--Checkbox para recordar el email-->
+                            <label>
+                                <input type="checkbox" name="recuerdame" <?= isset($_COOKIE['emailLogin']) ? 'checked' : '' ?>> Recuérdame
+                            </label>
                             <button type="submit" name="botonLogin">Entrar</button>
                         </form>
                     </div>
                     <div class="register">
-                        <h3>Registrate</h3>
+                        <h3>Regístrate</h3>
                         <?php if (isset($_SESSION['success_message']))
                             echo $_SESSION['success_message']; ?>
                         <form method="POST" action="registro.php">
@@ -108,7 +113,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 <?php } else { ?>
                     <div>
                         <form method="POST" action="metodos/actualizarDatosUsuario.php">
-                            <button type="submit" name="actualizarDatosUsuario.php">Editar datos de usuario</button>
+                            <button type="submit" name="actualizarDatosUsuario">Editar datos de usuario</button>
                         </form>
                         <form method="POST" action="logout.php">
                             <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
@@ -117,8 +122,8 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                             <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
                         </form>
                         <form method="POST" action="./metodos/crearEntradas.php">
-                        <button type="submit" name="crearEntrada">Crear Entrada</button>
-                    </form>
+                            <button type="submit" name="crearEntrada">Crear Entrada</button>
+                        </form>
                     </div>
                 <?php } ?>
 
