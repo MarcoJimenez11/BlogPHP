@@ -37,7 +37,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         <a href="metodos/listarEntradas.php?id=<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
                     </li>
                 <?php endforeach; ?>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="contacto.php">Contacto</a></li>
             </ul>
         </nav>
     </header>
