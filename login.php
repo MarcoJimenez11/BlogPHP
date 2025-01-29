@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
     $email = filter_var(trim($_POST['emailLogin']), FILTER_VALIDATE_EMAIL);
     // Comprobamos que la contraeña es válida
     $password = trim($_POST['passwordLogin']);
+    $recuerdame = isset($_POST['recuerdame']); // Checkbox "Recuérdame"
 
     if ($email && $password) {
         $stmt = $db->prepare("SELECT * FROM usuarios WHERE email = :email");
@@ -27,6 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['errorInicioSesion'] = 0;
                     $_SESSION['loginExito'] = true;
+
+                //Guardo en el email en una cookie si el ckeckbox está activado
+                if ($recuerdame) {
+                    setcookie("emailLogin", $email, time() + (30 * 24 * 60 * 60), "/"); //expira en 30 días
+                } else {
+                    //Si el usuario no marca "Recuérdame" se eliminar la cookie
+                    setcookie("emailLogin", "", time() - 3600, "/");
+                }
+
+                header("Location: index.php");
+                exit();
+
                 } else {
                     $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
                     $_SESSION['errorInicioSesion']++;

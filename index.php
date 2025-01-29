@@ -72,46 +72,51 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
-                    <?php 
-                    if(isset($_SESSION['errorEmailLogin'])){
+                    <?php
+                    if (isset($_SESSION['errorEmailLogin'])) {
                         echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
-                    }else{
-                    if (isset($_SESSION['errorPassLogin'])){
-                        echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
+                    } else {
+                        if (isset($_SESSION['errorPassLogin'])) {
+                            echo '<span style="color: red;">' . $_SESSION['errorPassLogin'] . '</span>';
                         }
                     } ?>
-                <div class="login">
-                    <h3>Identificate</h3>
-                    <?php if (isset($_SESSION['errorPassLogin']))
-                        echo $_SESSION['errorPassLogin']; ?>
-                    <form method="POST" action="login.php">
-                        <input type="email" name="emailLogin" placeholder="Email">
-                        <input type="password" name="passwordLogin" placeholder="Contraseña">
-                        <button type="submit" name="botonLogin">Entrar</button>
-                    </form>
-                </div>
-                <div class="register">
-                    <h3>Registrate</h3>
-                    <?php if (isset($_SESSION['success_message']))
-                        echo $_SESSION['success_message']; ?>
-                    <form method="POST" action="registro.php">
-                        <input type="text" name="nombreRegistro" placeholder="Nombre">
-                        <input type="text" name="apellidosRegistro" placeholder="Apellidos">
-                        <input type="email" name="emailRegistro" placeholder="Email">
-                        <input type="password" name="passwordRegistro" placeholder="Contraseña">
-                        <button type="submit" name="botonRegistro">Registrar</button>
-                    </form>
-                </div>
-            <?php } else { ?>  
-                <div>
-                    <form method="POST" action="logout.php">
-                        <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
-                    </form>
-                    <form method="POST" action="metodos/crearCategoria.php">
-                        <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
-                    </form>
-                </div>
-            <?php } ?>
+                    <div class="login">
+                        <h3>Identificate</h3>
+                        <?php if (isset($_SESSION['errorPassLogin']))
+                            echo $_SESSION['errorPassLogin']; ?>
+                        <form method="POST" action="login.php">
+                            <input type="email" name="emailLogin" placeholder="Email"
+                                value="<?= isset($_COOKIE['emailLogin']) ? htmlspecialchars($_COOKIE['emailLogin']) : '' ?>" required>
+                            <input type="password" name="passwordLogin" placeholder="Contraseña" required>
+                            <!--Checkbox para recordar el email-->
+                            <label>
+                                <input type="checkbox" name="recuerdame" <?= isset($_COOKIE['emailLogin']) ? 'checked' : '' ?>> Recuérdame
+                            </label>
+                            <button type="submit" name="botonLogin">Entrar</button>
+                        </form>
+                    </div>
+                    <div class="register">
+                        <h3>Registrate</h3>
+                        <?php if (isset($_SESSION['success_message']))
+                            echo $_SESSION['success_message']; ?>
+                        <form method="POST" action="registro.php">
+                            <input type="text" name="nombreRegistro" placeholder="Nombre">
+                            <input type="text" name="apellidosRegistro" placeholder="Apellidos">
+                            <input type="email" name="emailRegistro" placeholder="Email">
+                            <input type="password" name="passwordRegistro" placeholder="Contraseña">
+                            <button type="submit" name="botonRegistro">Registrar</button>
+                        </form>
+                    </div>
+                <?php } else { ?>
+                    <div>
+                        <form method="POST" action="logout.php">
+                            <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                        </form>
+                        <form method="POST" action="metodos/crearCategoria.php">
+                            <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
+                        </form>
+                    </div>
+                <?php } ?>
 
         </aside>
     </main>
