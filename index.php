@@ -33,11 +33,11 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 $categorias = conseguirCategorias($db);
                 foreach ($categorias as $categoria):
                 ?>
-                    <li value="<?= $categoria['id'] ?>">
-                        <a href="#"><?= htmlspecialchars($categoria['nombre']) ?></a>
+                    <li>
+                        <a href="metodos/listarEntradas.php?id=<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></a>
                     </li>
                 <?php endforeach; ?>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="contacto.php">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -58,20 +58,23 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php else: ?>
                 <p>No se han encontrado entradas</p>
             <?php endif; ?>
-            <form action="./metodos/listarTodasEntradas.php" method="post">
+            <form action="./metodos/listarEntradas.php" method="post">
                 <button>Ver todas las entradas</button>
             </form>
         </section>
         <aside>
             <div class="search">
                 <h3>Buscar</h3>
-                <input type="text" placeholder="Buscar...">
+                <form action="./metodos/listarEntradas.php" method="post">
+                <input type="text" name="buscarTitulo" placeholder="Buscar...">
                 <button>Buscar</button>
+                </form>
+                
             </div>
             <!--Manejo de errores del formulario login-->
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
-                    <h3>Identificate</h3>
+                    <h3>Identifícate</h3>
                     <?php
                     if (isset($_SESSION['errorEmailLogin'])) {
                         echo '<span style="color: red;">' . $_SESSION['errorEmailLogin'] . '</span>';
@@ -81,7 +84,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         }
                     } ?>
                     <div class="login">
-                        <h3>Identificate</h3>
+                        <h3>Identifícate</h3>
                         <?php if (isset($_SESSION['errorPassLogin']))
                             echo $_SESSION['errorPassLogin']; ?>
                         <form method="POST" action="login.php">
@@ -96,7 +99,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         </form>
                     </div>
                     <div class="register">
-                        <h3>Registrate</h3>
+                        <h3>Regístrate</h3>
                         <?php if (isset($_SESSION['success_message']))
                             echo $_SESSION['success_message']; ?>
                         <form method="POST" action="registro.php">
@@ -109,11 +112,17 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     </div>
                 <?php } else { ?>
                     <div>
+                        <form method="POST" action="metodos/actualizarDatosUsuario.php">
+                            <button type="submit" name="actualizarDatosUsuario">Editar datos de usuario</button>
+                        </form>
                         <form method="POST" action="logout.php">
                             <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                         </form>
                         <form method="POST" action="metodos/crearCategoria.php">
                             <button type="submit" name="botonCrearCategoria">Crear Categoría</button>
+                        </form>
+                        <form method="POST" action="./metodos/crearEntradas.php">
+                            <button type="submit" name="crearEntrada">Crear Entrada</button>
                         </form>
                     </div>
                 <?php } ?>

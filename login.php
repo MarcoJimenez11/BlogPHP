@@ -22,10 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
+
         if ($stmt->rowCount() == 1) { //si la contraseña es correcta
-            $user = $stmt->fetch();
-            if ($user['email'] === $email) {
-                if (password_verify($password, $user['password'])) {
+            $usuario = $stmt->fetch();
+            // die(var_dump($usuario));
+            if ($usuario['email'] === $email) {
+                if (password_verify($password, $usuario['password'])) {
+                    // die(var_dump($usuario["nombre"]));
+                    $_SESSION['usuario'] = [
+                        'id' => $usuario['id'],
+                        'nombre' => $usuario['nombre'],
+                        'apellidos' => $usuario['apellidos'],
+                        'email' => $usuario['email']
+                    ];
+
                     $_SESSION['errorInicioSesion'] = 0;
                     $_SESSION['loginExito'] = true;
 
