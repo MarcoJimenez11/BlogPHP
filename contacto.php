@@ -3,29 +3,7 @@ session_start();
 require_once 'requires/conexion.php';
 require_once './metodos/metodosExternos/conseguirCategorias.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['boton_contacto'])) {
-    //Validar email
-    $email_contacto = filter_var(trim($_POST['email_contacto']), FILTER_VALIDATE_EMAIL);
 
-    if ($email_contacto) {
-        //Sanitizar datos (esto siempre es bueno hacerlo)
-        $nombre_contacto = htmlspecialchars(trim($_POST['nombre_contacto']));
-        $descripcion_contacto = htmlspecialchars(trim($_POST['mensaje_contacto']));
-
-        // Insertar datos en la base de datos sin verificar si el email ya existe
-        $stmt = $db->prepare("INSERT INTO contacto (Nombre, Email, Descripcion) VALUES (:nombre_contacto, :email_contacto, :descripcion_contacto)");
-        $stmt->bindParam(':nombre_contacto', $nombre_contacto);
-        $stmt->bindParam(':email_contacto', $email_contacto);
-        $stmt->bindParam(':descripcion_contacto', $descripcion_contacto);
-        $stmt->execute();
-
-        // Redirigir al usuario a hasContactado.php después de enviar el formulario
-        header("Location: hasContactado.php");
-        exit();
-    } else {
-        echo "<p style='color: red;'>Por favor, introduce un email válido.</p>";
-    }
-}
 ?>
 
 
