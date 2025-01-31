@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->execute()) {
             // header("Location: verEntrada.php?id=$entrada_id");
-            header("Location: ./listarTodasEntradas.php");
+            header("Location: ./listarEntradas.php");
             exit;
         } else {
             $error = "Error al actualizar la entrada.";
