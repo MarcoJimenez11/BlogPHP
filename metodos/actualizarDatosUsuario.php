@@ -70,14 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonActualizar'])) {
 </head>
 
 <body>
-    <header>
-        <h1>Actualizar Datos de Usuario</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.php">Inicio</a></li>
-            </ul>
-        </nav>
-    </header>
     <main>
         <section>
             <?php if (!empty($exito)): ?>
