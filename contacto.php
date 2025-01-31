@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['boton_contacto'])) {
     <!--Formulario-->
     <main>
         <h2>Ponte en contacto con nosotros</h2>
-        <form method="POST" action="">
+        <form method="POST" action="hasContactado.php">
             <input type="text" name="nombre_contacto" id="nombre_contacto" placeholder="Nombre" required><br>
             <input type="email" name="email_contacto" id="email_contacto" placeholder="Email" required><br>
             <textarea name="mensaje_contacto" placeholder="Escríbenos tu mensaje" required></textarea><br>

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
                 if ($recuerdame) {
                     setcookie("emailLogin", $email, time() + (30 * 24 * 60 * 60), "/"); //expira en 30 días
                 } else {
-                    //Si el usuario no marca "Recuérdame" se eliminar la cookie
+                    //Si el usuario no marca "Recuérdame" se elimina la cookie
                     setcookie("emailLogin", "", time() - 3600, "/");
                 }
 

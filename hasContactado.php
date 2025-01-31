@@ -2,10 +2,10 @@
 session_start();
 //Capturo los datos del formulario
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $_SESSION['nombre_contacto'] = $_POST['nombre_contacto'];
-    $_SESSION['email_contacto'] = $_POST['email_contacto'];
+    $nombre = $_POST['nombre_contacto'];
+    $email = $_POST['email_contacto'];
 }
-//TENGO QUE PONER EL MENÚ ARRIBA
+
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +16,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <title>Muchas Gracias</title>
 </head>
 <body>
-    <h2>Gracias por contactar con nosotros, <?php echo $_SESSION['nombre_contacto'] ?></h2>
-    <p>En breve nos pondremos en contacto contigo a través de tu correo: <?php echo"<strong>" . $_SESSION['email_contacto'] . "</strong>" ?></p>
+    <h2>Gracias por contactar con nosotros, <?php echo $nombre ?></h2>
+    <p>En breve nos pondremos en contacto contigo a través de tu correo: <?php echo"<strong>" . $email . "</strong>" ?></p>
     <a href="index.php">Volver al inicio</a>
 </body>
 </html>
