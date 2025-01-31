@@ -29,7 +29,7 @@ $stmt->bindParam(':usuario_id', $_SESSION["usuario"]["id"], PDO::PARAM_INT);
 // Ahora hacemos una comprobación, si la consulta se ejecuta y afecta alguna fila.
 if ($stmt->execute()) {
     if ($stmt->rowCount() > 0) {
-        header("Location: ./listarTodasEntradas.php");
+        header("Location: ./listarEntradas.php");
         exit;
     } else {
         die("No se encontró la entrada o no tienes permiso para borrarla");
